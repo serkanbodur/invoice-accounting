@@ -5,7 +5,7 @@ import com.example.invoiceaccounting.dto.CreateInvoiceDTO;
 import com.example.invoiceaccounting.dto.ResponseInvoiceDTO;
 import com.example.invoiceaccounting.repository.InvoiceRepository;
 import com.example.invoiceaccounting.service.InvoiceService;
-import enums.EnumInvoiceStatus;
+import com.example.invoiceaccounting.enums.EnumInvoiceStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -43,4 +43,15 @@ public class InvoiceServiceImpl implements InvoiceService {
         return InvoiceConverter.INSTANCE.convertInvoiceToResponseInvoiceDTO(invoice);
     }
 
+    @Override
+    public List<ResponseInvoiceDTO> findAllApproved() {
+        var approvedInvoiceList = invoiceRepository.findAllByInvoiceStatus(EnumInvoiceStatus.APPROVED);
+        return InvoiceConverter.INSTANCE.convertInvoiceToResponseInvoiceDTOs(approvedInvoiceList);
+    }
+
+    @Override
+    public List<ResponseInvoiceDTO> findAllRejected() {
+        var rejectedInvoiceList = invoiceRepository.findAllByInvoiceStatus(EnumInvoiceStatus.REJECT);
+        return InvoiceConverter.INSTANCE.convertInvoiceToResponseInvoiceDTOs(rejectedInvoiceList);
+    }
 }

@@ -1,4 +1,4 @@
-package enums;
+package com.example.invoiceaccounting.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

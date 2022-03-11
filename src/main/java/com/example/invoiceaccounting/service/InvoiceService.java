@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface InvoiceService {
     ResponseInvoiceDTO save(CreateInvoiceDTO createInvoiceDTO);
+    List<ResponseInvoiceDTO> findAllApproved();
+    List<ResponseInvoiceDTO> findAllRejected();
 }

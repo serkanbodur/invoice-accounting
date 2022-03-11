@@ -1,6 +1,6 @@
 package com.example.invoiceaccounting.dto;
 
-import enums.EnumInvoiceStatus;
+import com.example.invoiceaccounting.enums.EnumInvoiceStatus;
 import lombok.Data;
 
 import java.math.BigDecimal;

@@ -1,6 +1,6 @@
 package com.example.invoiceaccounting.entity;
 
-import enums.EnumInvoiceStatus;
+import com.example.invoiceaccounting.enums.EnumInvoiceStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -17,10 +17,21 @@ public class InvoiceController {
 
     private final InvoiceService invoiceService;
 
-    @PostMapping(value ="")
+    @PostMapping()
     public ResponseEntity<ResponseInvoiceDTO> save(@RequestBody CreateInvoiceDTO createInvoiceDTO) {
         var responseInvoiceDTO = invoiceService.save(createInvoiceDTO);
         return new ResponseEntity<>(responseInvoiceDTO, HttpStatus.CREATED);
     }
 
+    @GetMapping(value = "/approved")
+    public ResponseEntity<List<ResponseInvoiceDTO>> getApprovedInvoices() {
+        var approvedInvoiceDTOs = invoiceService.findAllApproved();
+        return new ResponseEntity<>(approvedInvoiceDTOs, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/rejected")
+    public ResponseEntity<List<ResponseInvoiceDTO>> getRejectedInvoices(){
+        var rejectedInvoiceDTOs = invoiceService.findAllRejected();
+        return new ResponseEntity<>(rejectedInvoiceDTOs, HttpStatus.OK);
+    }
 }
