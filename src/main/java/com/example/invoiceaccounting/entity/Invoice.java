@@ -1,4 +1,4 @@
-package entity;
+package com.example.invoiceaccounting.entity;
 
 import enums.EnumInvoiceStatus;
 import lombok.AllArgsConstructor;
@@ -36,9 +36,9 @@ public class Invoice implements Serializable {
     @Column(name = "product_name")
     private String productName;
 
-    @Column(name = "bill_number")
-    private String billNumber;
+    @Column(name = "invoice_number")
+    private String invoiceNumber;
 
-    @Column(name = "bill_status")
+    @Column(name = "invoice_status")
     private EnumInvoiceStatus invoiceStatus;
 }

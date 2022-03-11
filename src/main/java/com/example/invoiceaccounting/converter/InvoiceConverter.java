@@ -1,11 +1,13 @@
-package converter;
+package com.example.invoiceaccounting.converter;
 
-import dto.CreateInvoiceDTO;
-import dto.ResponseInvoiceDTO;
-import entity.Invoice;
+import com.example.invoiceaccounting.dto.CreateInvoiceDTO;
+import com.example.invoiceaccounting.dto.ResponseInvoiceDTO;
+import com.example.invoiceaccounting.entity.Invoice;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
+
+import java.util.List;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface InvoiceConverter {
@@ -19,4 +21,7 @@ public interface InvoiceConverter {
     ResponseInvoiceDTO convertInvoiceToResponseInvoiceDTO(Invoice invoice);
 
     Invoice convertResponseInvoiceDTOToInvoice(ResponseInvoiceDTO responseInvoiceDTO);
+
+    List<ResponseInvoiceDTO> convertInvoiceToResponseInvoiceDTOs(List<Invoice> invoices);
+
 }
