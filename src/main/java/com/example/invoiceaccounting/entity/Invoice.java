@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Comparator;
 
 @Entity
 @NoArgsConstructor
@@ -41,4 +42,12 @@ public class Invoice implements Serializable {
 
     @Column(name = "invoice_status")
     private EnumInvoiceStatus invoiceStatus;
+
+    public Boolean compareTo(Invoice o){
+        int result = Comparator.comparing(Invoice::getFirstName)
+                .thenComparing(Invoice::getLastName)
+                .compare(this, o);
+
+        return result == 0;
+    }
 }

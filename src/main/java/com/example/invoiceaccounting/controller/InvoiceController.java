@@ -19,8 +19,10 @@ public class InvoiceController {
 
     @PostMapping()
     public ResponseEntity<ResponseInvoiceDTO> save(@RequestBody CreateInvoiceDTO createInvoiceDTO) {
-        var responseInvoiceDTO = invoiceService.save(createInvoiceDTO);
-        return new ResponseEntity<>(responseInvoiceDTO, HttpStatus.CREATED);
+     //   var responseInvoiceDTO = invoiceService.save(createInvoiceDTO);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(invoiceService.save(createInvoiceDTO));
     }
 
     @GetMapping(value = "/approved")

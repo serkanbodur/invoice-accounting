@@ -9,4 +9,5 @@ public interface InvoiceService {
     ResponseInvoiceDTO save(CreateInvoiceDTO createInvoiceDTO);
     List<ResponseInvoiceDTO> findAllApproved();
     List<ResponseInvoiceDTO> findAllRejected();
+    Boolean isEmailInUseByDifferentUser(CreateInvoiceDTO createInvoiceDTO);
 }

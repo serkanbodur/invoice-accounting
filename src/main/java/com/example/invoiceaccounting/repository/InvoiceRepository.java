@@ -11,4 +11,5 @@ import java.util.List;
 public interface InvoiceRepository extends JpaRepository<Invoice, Long> {
 
     List<Invoice> findAllByInvoiceStatus(EnumInvoiceStatus invoiceStatus);
+    List<Invoice> findAllByEmail(String email);
 }

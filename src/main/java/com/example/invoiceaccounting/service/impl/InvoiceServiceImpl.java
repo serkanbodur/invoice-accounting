@@ -3,6 +3,7 @@ package com.example.invoiceaccounting.service.impl;
 import com.example.invoiceaccounting.converter.InvoiceConverter;
 import com.example.invoiceaccounting.dto.CreateInvoiceDTO;
 import com.example.invoiceaccounting.dto.ResponseInvoiceDTO;
+import com.example.invoiceaccounting.exception.EmailIsAlreadyInUseException;
 import com.example.invoiceaccounting.repository.InvoiceRepository;
 import com.example.invoiceaccounting.service.InvoiceService;
 import com.example.invoiceaccounting.enums.EnumInvoiceStatus;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -25,17 +27,19 @@ public class InvoiceServiceImpl implements InvoiceService {
     @Override
     public ResponseInvoiceDTO save(CreateInvoiceDTO createInvoiceDTO) {
 
+        if (isEmailInUseByDifferentUser(createInvoiceDTO)) {
+            throw new EmailIsAlreadyInUseException("This email is already in use by different user");
+        }
+
         var invoice = InvoiceConverter.INSTANCE.convertCreateInvoiceDTOToInvoice(createInvoiceDTO);
         var approvedList = invoiceRepository.findAllByInvoiceStatus(EnumInvoiceStatus.APPROVED);
         var sumAmount = approvedList.stream()
                 .filter(i -> i.getEmail().equals(createInvoiceDTO.getEmail()))
-                .mapToInt(i -> i.getAmount().intValue()+createInvoiceDTO.getAmount().intValue()).sum();
+                .mapToInt(i -> i.getAmount().intValue() + createInvoiceDTO.getAmount().intValue()).sum();
 
-        if(sumAmount > LIMIT) {
+        if (sumAmount > LIMIT) {
             invoice.setInvoiceStatus(EnumInvoiceStatus.REJECT);
-        }
-
-        else {
+        } else {
             invoice.setInvoiceStatus(EnumInvoiceStatus.APPROVED);
         }
 
@@ -54,4 +58,17 @@ public class InvoiceServiceImpl implements InvoiceService {
         var rejectedInvoiceList = invoiceRepository.findAllByInvoiceStatus(EnumInvoiceStatus.REJECT);
         return InvoiceConverter.INSTANCE.convertInvoiceToResponseInvoiceDTOs(rejectedInvoiceList);
     }
+
+
+    @Override
+    public Boolean isEmailInUseByDifferentUser(CreateInvoiceDTO createInvoiceDTO) {
+        var foundInvoice = invoiceRepository.findAllByEmail(createInvoiceDTO.getEmail());
+        if(foundInvoice.isEmpty()) {
+            return false;
+        }
+        var invoice = InvoiceConverter.INSTANCE.convertCreateInvoiceDTOToInvoice(createInvoiceDTO);
+
+        return !invoice.compareTo(foundInvoice.get(0));
+    }
+
 }
