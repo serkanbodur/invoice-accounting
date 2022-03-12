@@ -24,4 +24,6 @@ public interface InvoiceConverter {
 
     List<ResponseInvoiceDTO> convertInvoiceToResponseInvoiceDTOs(List<Invoice> invoices);
 
+    List<Invoice> convertResponseInvoiceDTOsToInvoices(List<ResponseInvoiceDTO> responseInvoiceDTOs);
+
 }
