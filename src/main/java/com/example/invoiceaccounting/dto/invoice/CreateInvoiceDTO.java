@@ -11,7 +11,7 @@ public class CreateInvoiceDTO {
     private String firstName;
     private String lastName;
     private String email;
-    private BigDecimal amount;
+    private Double amount;
     private String productName;
     private String invoiceNumber;
 }

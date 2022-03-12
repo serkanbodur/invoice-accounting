@@ -32,7 +32,7 @@ public class Invoice implements Serializable {
     private String email;
 
     @Column(name = "amount")
-    private BigDecimal amount;
+    private Double amount;
 
     @Column(name = "product_name")
     private String productName;
