@@ -1,8 +1,8 @@
 package com.example.invoiceaccounting.service.impl;
 
 import com.example.invoiceaccounting.converter.InvoiceConverter;
-import com.example.invoiceaccounting.dto.CreateInvoiceDTO;
-import com.example.invoiceaccounting.dto.ResponseInvoiceDTO;
+import com.example.invoiceaccounting.dto.invoice.CreateInvoiceDTO;
+import com.example.invoiceaccounting.dto.invoice.ResponseInvoiceDTO;
 import com.example.invoiceaccounting.exception.EmailIsAlreadyInUseException;
 import com.example.invoiceaccounting.repository.InvoiceRepository;
 import com.example.invoiceaccounting.service.InvoiceService;
@@ -11,9 +11,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.List;
-import java.util.Objects;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -39,6 +38,7 @@ public class InvoiceServiceImpl implements InvoiceService {
 
         if (sumAmount > LIMIT) {
             invoice.setInvoiceStatus(EnumInvoiceStatus.REJECT);
+
         } else {
             invoice.setInvoiceStatus(EnumInvoiceStatus.APPROVED);
         }

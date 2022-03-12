@@ -1,9 +1,12 @@
 package com.example.invoiceaccounting.controller;
 
-import com.example.invoiceaccounting.dto.CreateInvoiceDTO;
-import com.example.invoiceaccounting.dto.ResponseInvoiceDTO;
+import com.example.invoiceaccounting.dto.CustomResponseMessage;
+import com.example.invoiceaccounting.dto.invoice.CreateInvoiceDTO;
+import com.example.invoiceaccounting.dto.invoice.ResponseInvoiceDTO;
+import com.example.invoiceaccounting.enums.EnumInvoiceStatus;
 import com.example.invoiceaccounting.service.InvoiceService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,12 +20,30 @@ public class InvoiceController {
 
     private final InvoiceService invoiceService;
 
+    @Value("${constants.message.accept}")
+    private String ACCEPTEDMESSAGE;
+
+    @Value("${constants.message.reject}")
+    private String REJECTEDMESSAGE;
+
+
     @PostMapping()
-    public ResponseEntity<ResponseInvoiceDTO> save(@RequestBody CreateInvoiceDTO createInvoiceDTO) {
-     //   var responseInvoiceDTO = invoiceService.save(createInvoiceDTO);
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(invoiceService.save(createInvoiceDTO));
+    public ResponseEntity<CustomResponseMessage> save(@RequestBody CreateInvoiceDTO createInvoiceDTO) {
+
+        var customResponseMessage = new CustomResponseMessage();
+        var responseInvoiceDTO = invoiceService.save(createInvoiceDTO);
+        
+        if(responseInvoiceDTO.getInvoiceStatus().equals(EnumInvoiceStatus.APPROVED)) {
+            customResponseMessage.setMessage(ACCEPTEDMESSAGE);
+            customResponseMessage.setHttpStatus(HttpStatus.ACCEPTED);
+        }
+        else {
+            customResponseMessage.setMessage(REJECTEDMESSAGE);
+            customResponseMessage.setHttpStatus(HttpStatus.NOT_ACCEPTABLE);
+
+        }
+        customResponseMessage.setContent(responseInvoiceDTO);
+        return new ResponseEntity<>(customResponseMessage, HttpStatus.OK);
     }
 
     @GetMapping(value = "/approved")

@@ -1,9 +1,10 @@
 package com.example.invoiceaccounting.service;
 
-import com.example.invoiceaccounting.dto.CreateInvoiceDTO;
-import com.example.invoiceaccounting.dto.ResponseInvoiceDTO;
+import com.example.invoiceaccounting.dto.invoice.CreateInvoiceDTO;
+import com.example.invoiceaccounting.dto.invoice.ResponseInvoiceDTO;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface InvoiceService {
     ResponseInvoiceDTO save(CreateInvoiceDTO createInvoiceDTO);

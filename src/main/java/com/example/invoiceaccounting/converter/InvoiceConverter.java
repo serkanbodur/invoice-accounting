@@ -1,7 +1,7 @@
 package com.example.invoiceaccounting.converter;
 
-import com.example.invoiceaccounting.dto.CreateInvoiceDTO;
-import com.example.invoiceaccounting.dto.ResponseInvoiceDTO;
+import com.example.invoiceaccounting.dto.invoice.CreateInvoiceDTO;
+import com.example.invoiceaccounting.dto.invoice.ResponseInvoiceDTO;
 import com.example.invoiceaccounting.entity.Invoice;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;

@@ -1,18 +1,17 @@
-package com.example.invoiceaccounting.dto;
+package com.example.invoiceaccounting.dto.invoice;
 
-import com.example.invoiceaccounting.enums.EnumInvoiceStatus;
+
+import lombok.Builder;
 import lombok.Data;
 
 import java.math.BigDecimal;
 
 @Data
-public class ResponseInvoiceDTO {
-    private Long id;
+public class CreateInvoiceDTO {
     private String firstName;
     private String lastName;
     private String email;
     private BigDecimal amount;
     private String productName;
     private String invoiceNumber;
-    private EnumInvoiceStatus invoiceStatus;
 }
