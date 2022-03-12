@@ -27,10 +27,6 @@ public class InvoiceServiceImpl implements InvoiceService {
     @Override
     public ResponseInvoiceDTO save(CreateInvoiceDTO createInvoiceDTO) {
 
-        if (isEmailInUseByDifferentUser(createInvoiceDTO)) {
-            throw new EmailIsAlreadyInUseException("This email is already in use by different user");
-        }
-
         var invoice = InvoiceConverter.INSTANCE.convertCreateInvoiceDTOToInvoice(createInvoiceDTO);
         var approvedList = invoiceRepository.findAllByInvoiceStatus(EnumInvoiceStatus.APPROVED);
         var sumAmount = sumAmount(approvedList, createInvoiceDTO);

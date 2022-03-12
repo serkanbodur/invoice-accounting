@@ -4,6 +4,7 @@ import com.example.invoiceaccounting.dto.CustomResponseMessage;
 import com.example.invoiceaccounting.dto.invoice.CreateInvoiceDTO;
 import com.example.invoiceaccounting.dto.invoice.ResponseInvoiceDTO;
 import com.example.invoiceaccounting.enums.EnumInvoiceStatus;
+import com.example.invoiceaccounting.exception.EmailIsAlreadyInUseException;
 import com.example.invoiceaccounting.service.InvoiceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,11 +27,21 @@ public class InvoiceController {
     @Value("${constants.message.reject}")
     private String REJECTEDMESSAGE;
 
+    @Value("${constants.message.fail}")
+    private String FAILEDMESSAGE;
+
 
     @PostMapping()
     public ResponseEntity<CustomResponseMessage> save(@RequestBody CreateInvoiceDTO createInvoiceDTO) {
 
         var customResponseMessage = new CustomResponseMessage();
+
+        if (invoiceService.isEmailInUseByDifferentUser(createInvoiceDTO)) {
+            customResponseMessage.setMessage(FAILEDMESSAGE);
+            customResponseMessage.setHttpStatus(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(customResponseMessage, HttpStatus.BAD_REQUEST);
+        }
+
         var responseInvoiceDTO = invoiceService.save(createInvoiceDTO);
         
         if(responseInvoiceDTO.getInvoiceStatus().equals(EnumInvoiceStatus.APPROVED)) {
@@ -40,7 +51,6 @@ public class InvoiceController {
         else {
             customResponseMessage.setMessage(REJECTEDMESSAGE);
             customResponseMessage.setHttpStatus(HttpStatus.NOT_ACCEPTABLE);
-
         }
         customResponseMessage.setContent(responseInvoiceDTO);
         return new ResponseEntity<>(customResponseMessage, HttpStatus.OK);

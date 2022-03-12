@@ -156,6 +156,7 @@ public class InvoiceServiceTest {
         assertEquals(responseInvoice.getInvoiceStatus(), EnumInvoiceStatus.APPROVED);
     }
 
+    /*
     @Test
     public void shouldValidateEmailIsAlreadyInUse() {
         var invoice = new Invoice(1L, "firstName", "lastname", "email", 100.0, "pd1", "1234", EnumInvoiceStatus.APPROVED);
@@ -173,6 +174,7 @@ public class InvoiceServiceTest {
         when(invoiceService.save(createInvoiceDTO)).thenThrow(new EmailIsAlreadyInUseException("This email is already in use by different user"));
         assertThrows(EmailIsAlreadyInUseException.class, () -> invoiceService.save(createInvoiceDTO));
     }
+     */
 
 
     @Test
