@@ -3,6 +3,7 @@ package com.example.invoiceaccounting.service.impl;
 import com.example.invoiceaccounting.converter.InvoiceConverter;
 import com.example.invoiceaccounting.dto.invoice.CreateInvoiceDTO;
 import com.example.invoiceaccounting.dto.invoice.ResponseInvoiceDTO;
+import com.example.invoiceaccounting.entity.Invoice;
 import com.example.invoiceaccounting.exception.EmailIsAlreadyInUseException;
 import com.example.invoiceaccounting.repository.InvoiceRepository;
 import com.example.invoiceaccounting.service.InvoiceService;
@@ -32,9 +33,7 @@ public class InvoiceServiceImpl implements InvoiceService {
 
         var invoice = InvoiceConverter.INSTANCE.convertCreateInvoiceDTOToInvoice(createInvoiceDTO);
         var approvedList = invoiceRepository.findAllByInvoiceStatus(EnumInvoiceStatus.APPROVED);
-        var sumAmount = approvedList.stream()
-                .filter(i -> i.getEmail().equals(createInvoiceDTO.getEmail()))
-                .mapToInt(i -> i.getAmount().intValue() + createInvoiceDTO.getAmount().intValue()).sum();
+        var sumAmount = sumAmount(approvedList, createInvoiceDTO);
 
         if (sumAmount > LIMIT) {
             invoice.setInvoiceStatus(EnumInvoiceStatus.REJECT);
@@ -69,6 +68,13 @@ public class InvoiceServiceImpl implements InvoiceService {
         var invoice = InvoiceConverter.INSTANCE.convertCreateInvoiceDTOToInvoice(createInvoiceDTO);
 
         return !invoice.compareTo(foundInvoice.get(0));
+    }
+
+    @Override
+    public Double sumAmount(List<Invoice> invoices, CreateInvoiceDTO createInvoiceDTO) {
+        return invoices.stream()
+                .filter(i -> i.getEmail().equals(createInvoiceDTO.getEmail()))
+                .mapToDouble(i -> i.getAmount()).sum() + createInvoiceDTO.getAmount();
     }
 
 }
