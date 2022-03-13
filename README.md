@@ -97,7 +97,7 @@ Clone the repo
 </a>
 
 <a href="https://github.com/serkanbodur/invoice-accounting">
-    <img src="images/app-yml.PNG" alt="Logo" >
+    <img src="images/application-yml.PNG" alt="Logo" >
 </a>
 
 2. Build the project and get it ready to work.
@@ -138,6 +138,59 @@ so that the Docker image is created according to the created dockerfile
    ```sh
       docker run -p 8080:8080 invoiceaccountingapp 
    ```
+<!-- USAGE EXAMPLES -->
+## Usage
+
+- Run project once to create the tables and ddl operations
+- Apply the operations according to appropriate endpoints using Postman or Swagger.
+
+[Invoice Paths](https://github.com/serkanbodur/invoice-accounting/blob/master/src/main/java/com/example/invoiceaccounting/controller/InvoiceController.java)
+
+| Request Method | Route                     | Request Body                                                                                                                                   | Description               |
+|----------------|---------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------|
+| POST           | /api/v1/invoices          | {  "firstName": "firstName" , "lastName": "lastName" , "email": "email" , "amount": 100 , "productName": "product1" , "invoiceNumber": "1234"} | Save an invoice           |
+| GET            | /api/v1/invoices/approved | {  }                                                                                                                                           | Get all approved invoices |
+| GET            | /api/v1/invoices/rejected | {  }                                                                                                                                           | Get all rejected invoices |
+
+<!-- CONTRIBUTING -->
+## Contributing
+
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
+Don't forget to give the project a star! Thanks again!
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
+
+<!-- LICENSE -->
+## License
+
+Distributed under the MIT License. See `LICENSE.txt` for more information.
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
+<!-- CONTACT -->
+## Contact
+
+Serkan Bodur
+
+* [sbodur25@gmail.com](sbodur25@gmail.com)
+* [Linkedln](https://tr.linkedin.com/in/serkan-bodur)
+
+
+Project Link: [https://github.com/serkanbodur/invoice-accounting]
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
 
 
 
