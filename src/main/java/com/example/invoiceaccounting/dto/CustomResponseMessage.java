@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatus;
 public class CustomResponseMessage {
 
     private HttpStatus httpStatus;
-    private ResponseInvoiceDTO content;
     private String message;
 
 }

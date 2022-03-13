@@ -14,6 +14,6 @@ spring:
 constants:
   limit: 200
   message:
-    accept: This transaction is accepted
-    reject: This transaction is rejected
-    fail: This transaction is failed
+    accept: transaction is accepted
+    reject: transaction is rejected
+    fail: transaction is failed

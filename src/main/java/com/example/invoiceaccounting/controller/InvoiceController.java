@@ -35,8 +35,10 @@ public class InvoiceController {
 
         var customResponseMessage = new CustomResponseMessage();
 
+        var user = createInvoiceDTO.getFirstName() + " " + createInvoiceDTO.getLastName() + "'s ";
+
         if (invoiceService.isEmailInUseByDifferentUser(createInvoiceDTO)) {
-            customResponseMessage.setMessage(FAILEDMESSAGE);
+            customResponseMessage.setMessage(user + FAILEDMESSAGE);
             customResponseMessage.setHttpStatus(HttpStatus.BAD_REQUEST);
             return new ResponseEntity<>(customResponseMessage, HttpStatus.BAD_REQUEST);
         }
@@ -44,14 +46,13 @@ public class InvoiceController {
         var responseInvoiceDTO = invoiceService.save(createInvoiceDTO);
         
         if(responseInvoiceDTO.getInvoiceStatus().equals(EnumInvoiceStatus.APPROVED)) {
-            customResponseMessage.setMessage(ACCEPTEDMESSAGE);
+            customResponseMessage.setMessage(user + ACCEPTEDMESSAGE);
             customResponseMessage.setHttpStatus(HttpStatus.ACCEPTED);
         }
         else {
-            customResponseMessage.setMessage(REJECTEDMESSAGE);
+            customResponseMessage.setMessage(user + REJECTEDMESSAGE);
             customResponseMessage.setHttpStatus(HttpStatus.NOT_ACCEPTABLE);
         }
-        customResponseMessage.setContent(responseInvoiceDTO);
         return new ResponseEntity<>(customResponseMessage, HttpStatus.OK);
     }
 
