@@ -18,6 +18,8 @@
     </li>
     <li>
       <a href="#project-include">Project Include</a>
+      <a href="#project-screens">Project Screenshoots</a>
+
       <ul>
         <li><a href="#built-with">Built With</a></li>
       </ul>
@@ -55,6 +57,36 @@ Project Description:
 * The limit is the same for all purchasing professionals during the process period.
 * Each purchasing specialist is uniquely identified by the trio of Name, Surname and E-mail.
 * Transactions of people with the same name and surname but different email addresses are evaluated separately.
+* Transactions of people with the same name and surname but different email addresses are evaluated separately.
+* If a user with a different name or surname wants to perform an action with a previously registered email,
+  this action will fail and the http status will become fail.
+
+## Project Screen Shoots
+
+<p align="center">Accepted Invoice</p>
+<p align="center">
+<img src="images/accepted.PNG" alt="Logo">
+</p>
+
+<p align="center">Rejected Invoice</p>
+<p align="center">
+<img src="images/rejected.PNG" alt="Logo">
+</p>
+
+<p align="center">Failed Invoice</p>
+<p align="center">
+<img src="images/failed.PNG" alt="Logo">
+</p>
+
+<p align="center">All Accepted Invoice</p>
+<p align="center">
+<img src="images/getAllAccepted.PNG" alt="Logo">
+</p>
+
+<p align="center">All Rejected Invoices</p>
+<p align="center">
+<img src="images/getAllRejected.PNG" alt="Logo">
+</p>
 
 <!-- PROJECT INCLUDE -->
 
