@@ -66,9 +66,8 @@ Project Description:
 4. Requests can be sent to project endpoints with Postman or Swagger.
 5. You can find Postman Collection and Curl Commands in this project 
 
-* [Postman-Collection](https://github.com/serkanbodur/invoice-accounting/Invoice Accounting App.postman_collection.json)
-* [Curl-Commands](https://github.com/serkanbodur/invoice-accounting/curl-commands.txt)
-
+* [Postman-Collection](https://github.com/serkanbodur/invoice-accounting/blob/master/postman_collection.json)
+* [Curl-Commands](https://github.com/serkanbodur/invoice-accounting/blob/master/curl-commands.txt)
 
 
 ### Built With
