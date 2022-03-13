@@ -18,9 +18,8 @@
     </li>
     <li>
       <a href="#project-include">Project Include</a>
-      <a href="#project-screens">Project Screenshoots</a>
-
       <ul>
+        <li><a href="#project-screens">Project Screenshoots</a></li>
         <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
@@ -67,21 +66,25 @@ Project Description:
 <p align="center">
 <img src="images/accepted.PNG" alt="Logo">
 </p>
+<br>
 
 <p align="center">Rejected Invoice</p>
 <p align="center">
 <img src="images/rejected.PNG" alt="Logo">
 </p>
+<br>
 
 <p align="center">Failed Invoice</p>
 <p align="center">
 <img src="images/failed.PNG" alt="Logo">
 </p>
+<br>
 
 <p align="center">All Accepted Invoice</p>
 <p align="center">
 <img src="images/getAllAccepted.PNG" alt="Logo">
 </p>
+<br>
 
 <p align="center">All Rejected Invoices</p>
 <p align="center">
