@@ -56,7 +56,6 @@ Project Description:
 * The limit is the same for all purchasing professionals during the process period.
 * Each purchasing specialist is uniquely identified by the trio of Name, Surname and E-mail.
 * Transactions of people with the same name and surname but different email addresses are evaluated separately.
-* Transactions of people with the same name and surname but different email addresses are evaluated separately.
 * If a user with a different name or surname wants to perform an action with a previously registered email,
   this action will fail and the http status will become fail.
 
@@ -171,6 +170,7 @@ so that the Docker image is created according to the created dockerfile
 <a href="https://github.com/serkanbodur/invoice-accounting">
     <img src="images/docker-images.PNG" alt="Logo" >
 </a>
+<br>
 
 6. Run the Docker image by giving the port number we want it to run
    ```sh
