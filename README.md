@@ -64,6 +64,12 @@ Project Description:
 2. The tests were written using JUnit
 3. Project containerized with Docker
 4. Requests can be sent to project endpoints with Postman or Swagger.
+5. You can find Postman Collection and Curl Commands in this project 
+
+* [Postman-Collection](https://github.com/serkanbodur/invoice-accounting/Invoice Accounting App.postman_collection.json)
+* [Curl-Commands](https://github.com/serkanbodur/invoice-accounting/curl-commands.txt)
+
+
 
 ### Built With
 
