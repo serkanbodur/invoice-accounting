@@ -1,0 +1,22 @@
+-- Save invoices --
+
+curl -X 'POST'                            --> Request Method Type
+\ 'http://localhost:8080/api/v1/invoices' --> api Url Path for this request
+\ -H 'accept: */*'                        --> accept "/" character
+\ -H 'Content-Type: application/json'     --> the data will be json format
+\ -d '{ "firstName": "firstName", "lastName": "lastName", "email": "email", "amount": 100, "productName": "pd1", "invoiceNumber": "inv1"}' --> the json object to send request
+
+
+-- Get approved invoices
+
+curl -X 'GET'
+\ 'http://localhost:8080/api/v1/invoices/approved'
+\ -H 'accept: */*'
+
+
+-- Get rejected invoices
+
+curl -X 'GET'
+\ 'http://localhost:8080/api/v1/invoices/rejected'
+\ -H 'accept: */*'
+
