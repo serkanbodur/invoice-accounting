@@ -5,7 +5,6 @@ import com.example.invoiceaccounting.dto.invoice.CreateInvoiceDTO;
 import com.example.invoiceaccounting.dto.invoice.ResponseInvoiceDTO;
 import com.example.invoiceaccounting.entity.Invoice;
 import com.example.invoiceaccounting.enums.EnumInvoiceStatus;
-import com.example.invoiceaccounting.exception.EmailIsAlreadyInUseException;
 import com.example.invoiceaccounting.repository.InvoiceRepository;
 import com.example.invoiceaccounting.service.impl.InvoiceServiceImpl;
 import org.junit.Test;
@@ -155,27 +154,6 @@ public class InvoiceServiceTest {
         assertThat(sumAmount, lessThanOrEqualTo(LIMIT));
         assertEquals(responseInvoice.getInvoiceStatus(), EnumInvoiceStatus.APPROVED);
     }
-
-    /*
-    @Test
-    public void shouldValidateEmailIsAlreadyInUse() {
-        var invoice = new Invoice(1L, "firstName", "lastname", "email", 100.0, "pd1", "1234", EnumInvoiceStatus.APPROVED);
-
-        var createInvoiceDTO = new CreateInvoiceDTO();
-        createInvoiceDTO.setEmail(invoice.getEmail());
-        createInvoiceDTO.setFirstName(invoice.getFirstName());
-        createInvoiceDTO.setLastName("testLastName");
-        createInvoiceDTO.setInvoiceNumber("1111");
-        createInvoiceDTO.setAmount(1.0);
-        createInvoiceDTO.setProductName("pd2");
-
-        when(invoiceRepository.save(invoice)).thenReturn(invoice);
-
-        when(invoiceService.save(createInvoiceDTO)).thenThrow(new EmailIsAlreadyInUseException("This email is already in use by different user"));
-        assertThrows(EmailIsAlreadyInUseException.class, () -> invoiceService.save(createInvoiceDTO));
-    }
-     */
-
 
     @Test
     public void shouldValidateFindAllApprovedInvoices() {
