@@ -1,0 +1,107 @@
+{
+	"info": {
+		"_postman_id": "d01ef3bb-5554-4667-be64-617d3b394e90",
+		"name": "Invoice Accounting App",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Save Invoice",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n    \"firstName\": \"firstName\" , \r\n    \"lastName\": \"lastName\" , \r\n    \"email\": \"email\" , \r\n    \"amount\": 100 , \r\n    \"productName\": \"product1\" , \r\n    \"invoiceNumber\": \"1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/invoices",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"invoices"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Rejected Invoices",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/invoices/rejected",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"invoices",
+						"rejected"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Approved Invoices",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/invoices/approved",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"invoices",
+						"approved"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
