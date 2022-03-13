@@ -4,7 +4,6 @@ import com.example.invoiceaccounting.dto.CustomResponseMessage;
 import com.example.invoiceaccounting.dto.invoice.CreateInvoiceDTO;
 import com.example.invoiceaccounting.dto.invoice.ResponseInvoiceDTO;
 import com.example.invoiceaccounting.enums.EnumInvoiceStatus;
-import com.example.invoiceaccounting.exception.EmailIsAlreadyInUseException;
 import com.example.invoiceaccounting.service.InvoiceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;

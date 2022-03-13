@@ -4,7 +4,6 @@ import com.example.invoiceaccounting.converter.InvoiceConverter;
 import com.example.invoiceaccounting.dto.invoice.CreateInvoiceDTO;
 import com.example.invoiceaccounting.dto.invoice.ResponseInvoiceDTO;
 import com.example.invoiceaccounting.entity.Invoice;
-import com.example.invoiceaccounting.exception.EmailIsAlreadyInUseException;
 import com.example.invoiceaccounting.repository.InvoiceRepository;
 import com.example.invoiceaccounting.service.InvoiceService;
 import com.example.invoiceaccounting.enums.EnumInvoiceStatus;

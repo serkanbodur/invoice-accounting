@@ -43,13 +43,13 @@ public class InvoiceServiceTest {
         List<Invoice> invoices = new ArrayList<>();
         invoices.add(foundInvoice);
 
-        var createInvoiceDTO = new CreateInvoiceDTO();
-        createInvoiceDTO.setEmail(foundInvoice.getEmail());
-        createInvoiceDTO.setFirstName(foundInvoice.getFirstName());
-        createInvoiceDTO.setLastName(foundInvoice.getLastName());
-        createInvoiceDTO.setInvoiceNumber("1111");
-        createInvoiceDTO.setAmount(50.0);
-        createInvoiceDTO.setProductName("pd2");
+        var createInvoiceDTO = CreateInvoiceDTO.builder()
+                .email(foundInvoice.getEmail())
+                .firstName(foundInvoice.getFirstName())
+                .lastName(foundInvoice.getLastName())
+                .amount(50.0)
+                .invoiceNumber("12344")
+                .productName("pd2").build();
 
         when(invoiceRepository.findAllByEmail(createInvoiceDTO.getEmail())).thenReturn(invoices);
 
@@ -60,6 +60,7 @@ public class InvoiceServiceTest {
         assertTrue(invoices.get(0).compareTo(InvoiceConverter.INSTANCE.convertCreateInvoiceDTOToInvoice(createInvoiceDTO)));
     }
 
+
     @Test
     public void shouldNotValidateDifferentUserInvoiceWhenUserEmailInUseWithDifferentNameOrSurname() {
 
@@ -68,13 +69,13 @@ public class InvoiceServiceTest {
         List<Invoice> invoices = new ArrayList<>();
         invoices.add(foundInvoice);
 
-        var createInvoiceDTO = new CreateInvoiceDTO();
-        createInvoiceDTO.setEmail(foundInvoice.getEmail());
-        createInvoiceDTO.setFirstName("dumpName");
-        createInvoiceDTO.setLastName(foundInvoice.getLastName());
-        createInvoiceDTO.setInvoiceNumber("1111");
-        createInvoiceDTO.setAmount(50.0);
-        createInvoiceDTO.setProductName("pd2");
+        var createInvoiceDTO = CreateInvoiceDTO.builder()
+                .email(foundInvoice.getEmail())
+                .firstName("testName")
+                .lastName(foundInvoice.getLastName())
+                .amount(foundInvoice.getAmount())
+                .invoiceNumber("12344")
+                .productName("pd2").build();
 
         when(invoiceRepository.findAllByEmail(createInvoiceDTO.getEmail())).thenReturn(invoices);
 
@@ -84,6 +85,30 @@ public class InvoiceServiceTest {
         assertNotEquals(invoices.get(0).getFirstName(), createInvoiceDTO.getFirstName());
 
         assertFalse(invoices.get(0).compareTo(InvoiceConverter.INSTANCE.convertCreateInvoiceDTOToInvoice(createInvoiceDTO)));
+    }
+
+    @Test
+    public void shouldValidateSumAmount(){
+        var firstInvoice = new Invoice(1L, "firstName", "lastname", "email", 100.0, "pd1", "1234", EnumInvoiceStatus.APPROVED);
+        var secondInvoice = new Invoice(2L, "firstName", "lastname", "email", 50.0, "pd2", "1235", EnumInvoiceStatus.APPROVED);
+
+        List<Invoice> invoices = new ArrayList<>();
+        invoices.add(firstInvoice);
+        invoices.add(secondInvoice);
+
+        var createInvoiceDTO = CreateInvoiceDTO.builder()
+                .email(firstInvoice.getEmail())
+                .firstName(firstInvoice.getFirstName())
+                .lastName(firstInvoice.getLastName())
+                .amount(10.0)
+                .invoiceNumber("12344")
+                .productName("pd2").build();
+
+        var sumAmountMethodResult = invoiceService.sumAmount(invoices, createInvoiceDTO);
+
+        var sumAmount = firstInvoice.getAmount()+secondInvoice.getAmount()+createInvoiceDTO.getAmount();
+
+        assertEquals(sumAmountMethodResult, sumAmount);
     }
 
     @Test
@@ -98,13 +123,13 @@ public class InvoiceServiceTest {
 
         when(invoiceRepository.findAllByInvoiceStatus(EnumInvoiceStatus.APPROVED)).thenReturn(invoices);
 
-        CreateInvoiceDTO createInvoiceDTO = new CreateInvoiceDTO();
-        createInvoiceDTO.setEmail(firstInvoice.getEmail());
-        createInvoiceDTO.setFirstName(firstInvoice.getFirstName());
-        createInvoiceDTO.setLastName(firstInvoice.getLastName());
-        createInvoiceDTO.setInvoiceNumber("1111");
-        createInvoiceDTO.setAmount(0.01);
-        createInvoiceDTO.setProductName("pd2");
+        var createInvoiceDTO = CreateInvoiceDTO.builder()
+                .email(firstInvoice.getEmail())
+                .firstName(firstInvoice.getFirstName())
+                .lastName(firstInvoice.getLastName())
+                .amount(0.01)
+                .invoiceNumber("12344")
+                .productName("pd3").build();
 
         var responseInvoice = InvoiceConverter.INSTANCE.convertCreateInvoiceDTOToInvoice(createInvoiceDTO);
 
@@ -133,13 +158,13 @@ public class InvoiceServiceTest {
 
         when(invoiceRepository.findAllByInvoiceStatus(EnumInvoiceStatus.APPROVED)).thenReturn(invoices);
 
-        CreateInvoiceDTO createInvoiceDTO = new CreateInvoiceDTO();
-        createInvoiceDTO.setEmail(firstInvoice.getEmail());
-        createInvoiceDTO.setFirstName(firstInvoice.getFirstName());
-        createInvoiceDTO.setLastName(firstInvoice.getLastName());
-        createInvoiceDTO.setInvoiceNumber("1111");
-        createInvoiceDTO.setAmount(1.0);
-        createInvoiceDTO.setProductName("pd2");
+        var createInvoiceDTO = CreateInvoiceDTO.builder()
+                .email(firstInvoice.getEmail())
+                .firstName(firstInvoice.getFirstName())
+                .lastName(firstInvoice.getLastName())
+                .amount(1.0)
+                .invoiceNumber("12344")
+                .productName("pd3").build();
 
         var responseInvoice = InvoiceConverter.INSTANCE.convertCreateInvoiceDTOToInvoice(createInvoiceDTO);
 
@@ -154,6 +179,7 @@ public class InvoiceServiceTest {
         assertThat(sumAmount, lessThanOrEqualTo(LIMIT));
         assertEquals(responseInvoice.getInvoiceStatus(), EnumInvoiceStatus.APPROVED);
     }
+
 
     @Test
     public void shouldValidateFindAllApprovedInvoices() {
@@ -180,6 +206,7 @@ public class InvoiceServiceTest {
         verify(invoiceRepository, times(1)).findAllByInvoiceStatus(EnumInvoiceStatus.APPROVED);
     }
 
+
     @Test
     public void shouldValidateFindAllRejectedInvoices() {
         List<Invoice> invoices = new ArrayList<Invoice>();
@@ -204,5 +231,4 @@ public class InvoiceServiceTest {
 
         verify(invoiceRepository, times(1)).findAllByInvoiceStatus(EnumInvoiceStatus.REJECT);
     }
-
 }
